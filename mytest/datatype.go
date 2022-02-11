@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-func testmap() {
+func Test_map() {
 	data := make([]interface{}, 2)
 	//var data [2]interface{}
 	for i := 0; i < 2; i++ {

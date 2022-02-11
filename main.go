@@ -1,7 +1,9 @@
 package main
 
+import "commpkg/mytest"
+
 //"commpkg/mytest"
 func main() {
 
-	mytest.testmap()
+	mytest.Test_map()
 }
