@@ -12,7 +12,7 @@ git show-ref
 
 git commit --allow-empty-message -m ""
 
-git commit -m "first commit"
+git commit -m "commit"
 
 git branch -M main
 git push -u origin main
