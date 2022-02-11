@@ -6,3 +6,17 @@ C:\Users\wangxp\.ssh\id_rsa.pub
 解决error: src refspec main does not match any
 执行
 git show-ref
+
+
+更新
+
+git commit --allow-empty-message -m ""
+
+git commit -m "first commit"
+
+git branch -M main
+git push -u origin main
+
+新增
+
+git add .
