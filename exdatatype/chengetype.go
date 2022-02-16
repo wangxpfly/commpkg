@@ -182,16 +182,15 @@ func ToString(str interface{}) (string, error) {
 		return "", errors.New("params is nil")
 	}
 	value := str
-	//fmt.Println("value:", value)
 	precision := 12 //浮点型，默认最多保持小数12位
 	switch value.(type) {
 	case string:
 		fmt.Println("string:", value)
 		v, _ := value.(string)
-		//fmt.Println("stringv:", v, err)
+
 		return v, nil
 	case int:
-		//fmt.Println("int:", value)
+
 		v, _ := value.(int)
 		return strconv.Itoa(v), nil
 	case int32:
