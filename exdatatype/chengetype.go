@@ -156,6 +156,7 @@ func ToFloat64(value interface{}) (float64, error) {
 	}
 }
 
+// 转换成 Mongo 的ID对象
 func ToObjectID(value interface{}) (primitive.ObjectID, error) {
 	if value == nil {
 		return primitive.NilObjectID, errors.New("params is nil")
@@ -217,7 +218,7 @@ func ToString(str interface{}) (string, error) {
 	}
 }
 
-// 数组转换成map
+// 转换成MAP map[string]interface{}
 func ToMap(data interface{}) (map[string]interface{}, error) {
 	if data == nil {
 		return nil, errors.New("params is nil")
@@ -225,20 +226,21 @@ func ToMap(data interface{}) (map[string]interface{}, error) {
 	switch reflect.TypeOf(data).Kind() {
 	case reflect.Map:
 		tmpmap := data.(map[string]interface{})
-		fmt.Println("pp:", tmpmap)
+		//fmt.Println("pp:", tmpmap)
 		return tmpmap, nil
 	default:
 		return nil, errors.New("unknown type")
 	}
 }
 
+// 转换成数组 []interface{}
 func ToArray(data interface{}) ([]interface{}, error) {
 	if data == nil {
 		return nil, errors.New("params is nil")
 	}
 	switch reflect.TypeOf(data).Kind() {
 	case reflect.Slice, reflect.Array:
-		fmt.Println("元素的值是: ", data, "反射类型是:", reflect.TypeOf(data))
+		//fmt.Println("元素的值是: ", data, "反射类型是:", reflect.TypeOf(data))
 		tmparr := data.([]interface{})
 		return tmparr, nil
 	default:
