@@ -1,8 +1,9 @@
 package mytest
 
 import (
-	"commpkg/exdatatype"
 	"fmt"
+
+	"github.com/wangxpfly/commpkg/exdatatype"
 )
 
 func Test_map() {

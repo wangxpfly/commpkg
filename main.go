@@ -1,6 +1,6 @@
 package main
 
-import "commpkg/mytest"
+import "github.com/wangxpfly/commpkg/mytest"
 
 //"commpkg/mytest"
 func main() {

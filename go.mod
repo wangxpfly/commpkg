@@ -1,4 +1,4 @@
-module commpkg
+module github.com/wangxpfly/commpkg
 
 go 1.17
 
