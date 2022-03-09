@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/wangxpfly/commpkg/exdatatype"
+	"go.mongodb.org/mongo-driver/bson"
 )
 
 func Test_map() {
@@ -22,6 +23,23 @@ func Test_map() {
 	}
 
 	tmparr, _ := exdatatype.ToArray(data)
+	//exdatatype.ToMap(data)
+	for _, datadic := range tmparr {
+		datamap, _ := exdatatype.ToMap(datadic)
+		fmt.Println("name:", datamap["name"], "age:", datamap["age"])
+	}
+}
+
+func Test_Array() {
+	dataA := bson.A{}
+	datamap := bson.M{"name": "dd", "age": 30}
+
+	dataA = append(dataA, datamap)
+	datamap1 := bson.M{"name": "ddd", "age": 20}
+
+	dataA = append(dataA, datamap1)
+
+	tmparr, _ := exdatatype.ToArray(dataA)
 	//exdatatype.ToMap(data)
 	for _, datadic := range tmparr {
 		datamap, _ := exdatatype.ToMap(datadic)

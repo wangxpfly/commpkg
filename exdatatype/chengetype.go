@@ -2,10 +2,10 @@ package exdatatype
 
 import (
 	"errors"
-	"fmt"
 	"reflect"
 	"strconv"
 
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -185,7 +185,7 @@ func ToString(str interface{}) (string, error) {
 	precision := 12 //浮点型，默认最多保持小数12位
 	switch value.(type) {
 	case string:
-		fmt.Println("string:", value)
+		//fmt.Println("string:", value)
 		v, _ := value.(string)
 
 		return v, nil
@@ -224,9 +224,20 @@ func ToMap(data interface{}) (map[string]interface{}, error) {
 	}
 	switch reflect.TypeOf(data).Kind() {
 	case reflect.Map:
-		tmpmap := data.(map[string]interface{})
-		//fmt.Println("pp:", tmpmap)
-		return tmpmap, nil
+		ptype := reflect.TypeOf(data)
+		if ptype.String() == "primitive.M" {
+			tmpmap := map[string]interface{}(data.(primitive.M))
+			return tmpmap, nil
+
+		} else if ptype.String() == "map[string]interface{}" {
+			tmpmap := data.(map[string]interface{})
+			//fmt.Println("pp:", tmpmap)
+			return tmpmap, nil
+		} else if ptype.String() == "bson.M" {
+			tmpmap := map[string]interface{}(data.(bson.M))
+			return tmpmap, nil
+		}
+		return nil, errors.New("unknown type")
 	default:
 		return nil, errors.New("unknown type")
 	}
@@ -239,9 +250,18 @@ func ToArray(data interface{}) ([]interface{}, error) {
 	}
 	switch reflect.TypeOf(data).Kind() {
 	case reflect.Slice, reflect.Array:
-		//fmt.Println("元素的值是: ", data, "反射类型是:", reflect.TypeOf(data))
-		tmparr := data.([]interface{})
-		return tmparr, nil
+		ptype := reflect.TypeOf(data)
+
+		//fmt.Println("元素的值是: ", data, "反射类型是:", reflect.TypeOf(data), reflect.TypeOf(data).Name())
+		if ptype.String() == "primitive.A" {
+			//fmt.Println("反射类型是:", reflect.TypeOf(data))
+			tmparr := []interface{}(data.(primitive.A))
+			return tmparr, nil
+		} else if ptype.String() == "[]interface {}" {
+			tmparr := data.([]interface{})
+			return tmparr, nil
+		}
+		return nil, errors.New("unknown type")
 	default:
 		return nil, errors.New("unknown type")
 	}

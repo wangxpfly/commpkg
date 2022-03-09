@@ -5,5 +5,6 @@ import "github.com/wangxpfly/commpkg/mytest"
 //"commpkg/mytest"
 func main() {
 
-	mytest.Test_map()
+	//mytest.Test_map()
+	mytest.Test_Array()
 }

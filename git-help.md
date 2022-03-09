@@ -20,3 +20,10 @@ git push -u origin main
 新增
 
 git add .
+
+
+打标签
+ 
+git tag v0.0.3
+
+git push origin --tags
