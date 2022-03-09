@@ -4,6 +4,7 @@ import (
 	"errors"
 	"reflect"
 	"strconv"
+	"strings"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -225,15 +226,17 @@ func ToMap(data interface{}) (map[string]interface{}, error) {
 	switch reflect.TypeOf(data).Kind() {
 	case reflect.Map:
 		ptype := reflect.TypeOf(data)
-		if ptype.String() == "primitive.M" {
+		tyStr := ptype.String()
+		tyStr = strings.Replace(tyStr, " ", "", -1) //去除空格
+		if tyStr == "primitive.M" {
 			tmpmap := map[string]interface{}(data.(primitive.M))
 			return tmpmap, nil
 
-		} else if ptype.String() == "map[string]interface{}" {
+		} else if tyStr == "map[string]interface{}" {
 			tmpmap := data.(map[string]interface{})
 			//fmt.Println("pp:", tmpmap)
 			return tmpmap, nil
-		} else if ptype.String() == "bson.M" {
+		} else if tyStr == "bson.M" {
 			tmpmap := map[string]interface{}(data.(bson.M))
 			return tmpmap, nil
 		}
